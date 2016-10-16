@@ -7,14 +7,15 @@ def insert_event(event):
     tbl = list(csv.reader(f,delimiter = "\t"))
     f.close()
     found = False
-    for i in range(0,len(tbl)):
-        if tbl[i][0] == event['player'] and tbl[i][1] == event['team']:
-            found = True
-            tbl[i][3] = float(tbl[i][3]) + event['duration']
-            if event['sport'] not in tbl[i][2]:
-                tbl[i][2] = ''.join([tbl[i][2],";",event['sport']])
-                tbl[i][3] += 2
-    if found == False:
+    if len(tbl) != 0:
+        for i in range(0,len(tbl)):
+            if tbl[i][0] == event['player'] and tbl[i][1] == event['team']:
+                found = True
+                tbl[i][3] = float(tbl[i][3]) + event['duration']
+                if event['sport'] not in tbl[i][2]:
+                    tbl[i][2] = ''.join([tbl[i][2],";",event['sport']])
+                    tbl[i][3] += 2
+    if not found:
         tbl.append([event['player'],event['team'],event['sport'],float(event['duration']) + 2])
     with open("player_table.txt",'w',newline='') as f:
         wrtr = csv.writer(f,delimiter = "\t")
@@ -22,6 +23,7 @@ def insert_event(event):
     with open("log.txt",'a',newline = '') as f:
         wrtr = csv.writer(f,delimiter = "\t")
         wrtr.writerow([event['player'],event['team'],event['sport'],event['duration']])
+
 
 def update_teams():
     f = open("player_table.txt")
@@ -44,6 +46,7 @@ def update_teams():
         wrtr = csv.writer(f,delimiter = "\t")
         wrtr.writerows(srtd)
 
+
 def get_scores():
     f = open("team_table.txt")
     tbl = list(csv.reader(f,delimiter = "\t"))
@@ -52,7 +55,8 @@ def get_scores():
         p.add_row(row)
     return (p.get_string(header=False, border=False))
 
-def dumbass (string):
+
+def dumbass(string):
     string = string.strip()
     string = string.lower()
     string = string.capitalize()
