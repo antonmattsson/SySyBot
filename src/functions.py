@@ -1,4 +1,5 @@
 import csv
+import os
 from prettytable import PrettyTable
 
 
@@ -7,7 +8,7 @@ def insert_event(event):
     tbl = list(csv.reader(f,delimiter = "\t"))
     f.close()
     found = False
-    if len(tbl) != 0:
+    if os.path.getsize('player_table.txt') > 0:
         for i in range(0,len(tbl)):
             if tbl[i][0] == event['player'] and tbl[i][1] == event['team']:
                 found = True
