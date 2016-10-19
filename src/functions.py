@@ -53,6 +53,7 @@ def get_scores():
     tbl = list(csv.reader(f,delimiter = "\t"))
     p = PrettyTable()
     for row in tbl:
+        row[1] = round(float(row[1]), ndigits=2)
         p.add_row(row)
     return (p.get_string(header=False, border=False))
 
