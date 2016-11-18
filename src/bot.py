@@ -72,6 +72,16 @@ def scores(bot,update):
     update.message.reply_text(functions.get_scores())
     return
 
+def sports(bot,update):
+    ev[update.message.from_user.id] = {}
+    update.message.reply_text('Please tell me your name')
+    return NAME
+
+def team_sports(bot,update):
+    ev[update.message.from_user.id]['team'] = functions.dumbass(update.message.text)
+    update.message.reply_text(functions.get_sports)
+    return ConversationHandler.END
+
 
 def error(bot, update, error):
     logger.warn('Update "%s" caused error "%s"' % (update, error))
@@ -100,12 +110,26 @@ def main():
 
         fallbacks=[CommandHandler('cancel', cancel)]
     )
-    
+
+    conv_handler_sports = ConversationHandler(
+        entry_points=[CommandHandler('sports', sports)],
+
+        states={
+            NAME: [MessageHandler([Filters.text], name)],
+
+            TEAM: [MessageHandler([Filters.text], team_sports)]
+        },
+
+        fallbacks=[CommandHandler('cancel', cancel)]
+    )
+
     scores_handler = CommandHandler('scores',scores)
 
     dp.add_handler(conv_handler)
     
     dp.add_handler(scores_handler)
+
+    dp.add_handler(conv_handler_sports)
 
     # log all errors
     dp.add_error_handler(error)

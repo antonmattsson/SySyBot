@@ -57,6 +57,20 @@ def get_scores():
         p.add_row(row)
     return (p.get_string(header=False, border=False))
 
+def get_sports(player,team):
+    f = open("player_table.txt")
+    tbl = list(csv.reader(f, delimiter="\t"))
+    f.close()
+    found = False
+    string = "Player not found"
+    if os.path.getsize('player_table.txt') > 0:
+        for row in tbl:
+            if row[0] == player and row[1] == team:
+                found = True
+                string = row[2]
+                string = string.split(";")
+    return string
+
 
 def dumbass(string):
     string = string.strip()
