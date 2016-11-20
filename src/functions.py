@@ -57,7 +57,9 @@ def get_scores():
         p.add_row(row)
     return (p.get_string(header=False, border=False))
 
-def get_sports(player,team):
+def get_sports(event):
+    player = event['player']
+    team = event['team']
     f = open("player_table.txt")
     tbl = list(csv.reader(f, delimiter="\t"))
     f.close()

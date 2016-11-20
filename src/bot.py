@@ -84,7 +84,7 @@ def name_sports(bot,update):
 
 def team_sports(bot,update):
     ev[update.message.from_user.id]['team'] = functions.dumbass(update.message.text)
-    update.message.reply_text(functions.get_sports)
+    update.message.reply_text(functions.get_sports(ev[update.message.from_user.id]))
     return ConversationHandler.END
 
 
