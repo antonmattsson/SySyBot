@@ -2,7 +2,6 @@ from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, Conv
 import functions
 import apikey
 import logging
-import codecs
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',

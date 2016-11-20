@@ -60,7 +60,7 @@ def get_scores():
 def get_sports(event):
     player = event['player']
     team = event['team']
-    f = codecs.open("player_table.txt",encoding="utf-8")
+    f = open("player_table.txt",encoding="utf-8")
     tbl = list(csv.reader(f, delimiter="\t"))
     f.close()
     found = False
