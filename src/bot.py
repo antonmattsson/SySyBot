@@ -9,7 +9,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
-NAME, TEAM, SPORT, DURATION = range(4)
+NAME, TEAM, SPORT, DURATION, NAME_SPORTS, TEAM_SPORTS = range(4)
 
 ev = {}
 
