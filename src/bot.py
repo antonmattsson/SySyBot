@@ -75,7 +75,12 @@ def scores(bot,update):
 def sports(bot,update):
     ev[update.message.from_user.id] = {}
     update.message.reply_text('Please tell me your name')
-    return NAME
+    return NAME_SPORTS
+
+def name_sports(bot,update):
+    ev[update.message.from_user.id]['player'] = functions.dumbass(update.message.text)
+    update.message.reply_text('What is your team called?')
+    return TEAM_SPORTS
 
 def team_sports(bot,update):
     ev[update.message.from_user.id]['team'] = functions.dumbass(update.message.text)
@@ -115,9 +120,9 @@ def main():
         entry_points=[CommandHandler('sports', sports)],
 
         states={
-            NAME: [MessageHandler([Filters.text], name)],
+            NAME_SPORTS: [MessageHandler([Filters.text], name_sports)],
 
-            TEAM: [MessageHandler([Filters.text], team_sports)]
+            TEAM_SPORTS: [MessageHandler([Filters.text], team_sports)]
         },
 
         fallbacks=[CommandHandler('cancel', cancel)]
